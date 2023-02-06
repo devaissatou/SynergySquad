@@ -3,19 +3,19 @@ pipeline {
     stages {
         stage('Récupération du code') {
             steps {
-                git branch: 'xxx',
+                git branch: 'deploy',
           credentialsId: '<credentials-id>',
-          url: '<repo-url>'
+          url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
         stage('Build de l’image de l’application') {
             steps {
-                sh 'docker build -t app-image -f Dockerfile-app .'
+                sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
             }
         }
         stage('Build de l’image de la base de données') {
             steps {
-                sh 'docker build -t db-image -f Dockerfile-db .'
+                sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
             }
         }
         stage('Déploiement des services') {
@@ -25,8 +25,8 @@ pipeline {
         }
         stage('Test de l’application') {
             steps {
-                sh 'curl http://localhost:8080'
-                sh 'firefox http://localhost:8080'
+                sh 'curl http://localhost:8000'
+                sh 'firefox http://localhost:8000'
             }
         }
         stage('Tag des images Docker') {
@@ -37,8 +37,8 @@ pipeline {
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-                sh 'docker push your-docker-hub-username/app-image:version'
-                sh 'docker push your-docker-hub-username/db-image:version'
+                sh 'docker push your-docker-hub-username/php:8.2-rc-apache'
+                sh 'docker push your-docker-hub-username/mysql:8.0'
             }
         }
     }
