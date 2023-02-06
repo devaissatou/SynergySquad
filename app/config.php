@@ -1,8 +1,8 @@
 <?php
 /* Database connexion */
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_SERVER', 'database');
+define('DB_USERNAME', 'test');
+define('DB_PASSWORD', 'test');
 define('DB_NAME', 'devops');
 
 /* Connexion à la base de données */
