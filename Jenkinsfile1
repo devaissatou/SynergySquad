@@ -10,12 +10,16 @@ pipeline {
         }
         stage('Build de l’image de l’application') {
             steps {
-                sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+		dir("app") {
+                    sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+                }
             }
         }
         stage('Build de l’image de la base de données') {
             steps {
-                sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+		dir("app") {
+                    sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+                }
             }
         }
         stage('Déploiement des services') {
