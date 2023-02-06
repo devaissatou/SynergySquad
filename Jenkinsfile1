@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Récupération du code') {
             steps {
-                git branch: 'deploy',
-          credentialsId: '<credentials-id>',
+                git branch: 'dev-insa',
+          credentialsId: '279ce16a-9cd4-4402-a8d2-87253dc39d96',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
@@ -37,8 +37,8 @@ pipeline {
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-                sh 'docker push your-docker-hub-username/php:8.2-rc-apache'
-                sh 'docker push your-docker-hub-username/mysql:8.0'
+                sh 'docker push devinsa777/php:8.2-rc-apache'
+                sh 'docker push devinsa777/mysql:8.0'
             }
         }
     }
