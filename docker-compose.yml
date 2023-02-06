@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  php-apache-environment:
+    container_name: webserver
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    depends_on:
+      - database-environment
+    volumes:
+      - ./app:/var/www/html/
+    ports:
+      - 8000:80
+  database-environment:
+    container_name: database
+    restart: always
+    build:
+      context: ./app
+      dockerfile: Dockerfile1
+
+    ports:
+        - "9906:3306"
+  phpmyadmin:
+    image: phpmyadmin:5.2.0-apache
+    ports:
+        - '8008:80'
+    restart: always
+    environment:
+        PMA_HOST: database
+    depends_on:
+        - database-environment

@@ -1,0 +1,10 @@
+FROM mysql:8.0
+# Configuration de l'environnement de la base de données
+ENV MYSQL_DATABASE=devops
+ENV MYSQL_USER=test
+ENV MYSQL_PASSWORD=test
+ENV MYSQL_ROOT_PASSWORD=test
+# Copie du script de création de la base de données dans le conteneur
+COPY devops.sql /docker-entrypoint-initdb.d/
+# Exposition du port 3306 pour les connexions à la base de données
+EXPOSE 3306
