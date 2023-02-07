@@ -1,14 +1,12 @@
 pipeline {
     agent any
 
-     environment {
-           PATH = "$PATH:/usr/local/bin/docker-compose"
-    }
+     
     stages {
         stage('Récupération du code') {
             steps {
                 git branch: 'dev-insa',
-          credentialsId: '279ce16a-9cd4-4402-a8d2-87253dc39d96',
+          credentialsId: 'a0ad0a09-b458-4bfe-aba9-d042f48a6816',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
