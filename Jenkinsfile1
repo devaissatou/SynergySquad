@@ -6,7 +6,7 @@ pipeline {
         stage('Récupération du code') {
             steps {
                 git branch: 'dev-insa',
-          credentialsId: 'a0ad0a09-b458-4bfe-aba9-d042f48a6816',
+          credentialsId: 'Khalidekane',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
