@@ -2,7 +2,7 @@ pipeline {
     agent any
 
      environment {
-           PATH = "$PATH:/usr/local/bin/docker-compose"
+           PATH = "$PATH:/usr/local/bin"
     }
     stages {
         stage('Récupération du code') {
@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Déploiement des services') {
             steps {
-                 sh '/usr/local/bin/docker-compose -f docker-compose.yml up -d'
+                 sh '/usr/local/bin -f docker-compose.yml up -d'
             }
         }
         stage('Test de l’application') {
