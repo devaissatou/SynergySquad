@@ -2,7 +2,7 @@ pipeline {
     agent any
 
      environment {
-        PATH = "$PATH:/usr/local/bin"
+           PATH = "$PATH:/usr/local/bin/docker-compose"
     }
     stages {
         stage('Récupération du code') {
@@ -39,8 +39,8 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app-image your-docker-hub-username/app-image:version'
-                sh 'docker tag db-image your-docker-hub-username/db-image:version'
+                sh 'docker tag app-image devinsa777/php:8.2-rc-apache'
+                sh 'docker tag db-image devinsa777/mysql:8.0'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
