@@ -1,12 +1,14 @@
 pipeline {
     agent any
 
-     
+     environment {
+        PATH = "$PATH:/usr/local/bin"
+    }
     stages {
         stage('Récupération du code') {
             steps {
                 git branch: 'dev-insa',
-          credentialsId: 'Khalidekane',
+          credentialsId: '39240f13-b961-47d9-96e8-2db869d212c4',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
@@ -26,7 +28,7 @@ pipeline {
         }
         stage('Déploiement des services') {
             steps {
-                 sh '/usr/local/bin/docker-compose -f docker-compose.yml up -d'
+                sh 'docker-compose -f docker-compose.yml up -d'
             }
         }
         stage('Test de l’application') {
@@ -37,8 +39,8 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app-image devinsa777/php:8.2-rc-apache'
-                sh 'docker tag db-image devinsa777/mysql:8.0'
+                sh 'docker tag app-image your-docker-hub-username/app-image:version'
+                sh 'docker tag db-image your-docker-hub-username/db-image:version'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
