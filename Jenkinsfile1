@@ -13,7 +13,7 @@ pipeline {
             steps {
 		dir("app") 
 		{
-                sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+                sh 'docker build -t app_synergietransport:1.0.0 -f Dockerfile .'
             }
         }
 		}
@@ -21,7 +21,7 @@ pipeline {
             steps {
 		dir("app") 
 	{
-                sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+                sh 'docker build -t db_synergietransport:1.0.0 -f Dockerfile1 .'
             }
         }
 		}
@@ -41,14 +41,14 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app-image devsegafl@gmail.com/app-image:version'
-                sh 'docker tag db-image devsegafl@gmail.com/db-image:version'
+                sh 'docker tag app_synergietransport:1.0.0 devsega/app_synergietransport:1.0.1'
+                sh 'docker tag db_synergietransport:1.0.0 devsega/db_synergietransport:1.0.1'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-                sh 'docker push devsegafl@gmail.com/php:8.2-rc-apache'
-                sh 'docker push devsegafl@gmail.com/mysql:8.0'
+                sh 'docker push devsega/synergysquad/app_synergietransport:1.0.1'
+                sh 'docker push devsega/synergysquad/db_synergietransport:1.0.1'
             }
         }
     }
