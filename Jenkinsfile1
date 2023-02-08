@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    stages {
+        stage('Récupération du code') {
+            steps {
+                git branch: 'dev_sega',
+          credentialsId: '050fd63a-9e70-4839-ab4d-ea1659d77f1f',
+          url: 'https://github.com/devaissatou/SynergySquad.git'
+            }
+        }
+        stage('Build de l’image de l’application') {
+            steps {
+                sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+            }
+        }
+        stage('Build de l’image de la base de données') {
+            steps {
+                sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+            }
+        }
+        stage('Déploiement des services') {
+            steps {
+                sh 'sudo /usr/local/bin/docker-compose -f docker-compose.yml up -d'
+            }
+        }
+        stage('Test de l’application') {
+            steps {
+                sh 'curl http://localhost:8000'
+                sh 'firefox http://localhost:8000'
+            }
+        }
+        stage('Tag des images Docker') {
+            steps {
+                sh 'docker tag app-image devsegafl@gmail.com/app-image:version'
+                sh 'docker tag db-image devsegafl@gmail.com/db-image:version'
+            }
+        }
+        stage('Push des images Docker sur Docker Hub') {
+            steps {
+                sh 'docker push your-docker-hub-username/php:8.2-rc-apache'
+                sh 'docker push your-docker-hub-username/mysql:8.0'
+            }
+        }
+    }
+}
