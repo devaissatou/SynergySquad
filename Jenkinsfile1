@@ -10,14 +10,20 @@ pipeline {
         }
         stage('Build de l’image de l’application') {
             steps {
+		dir("app") 
+		{
                 sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
             }
         }
+		}
         stage('Build de l’image de la base de données') {
             steps {
+		dir("app") 
+	{
                 sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
             }
         }
+		}
         stage('Déploiement des services') {
             steps {
                 sh 'sudo /usr/local/bin/docker-compose -f docker-compose.yml up -d'
@@ -37,8 +43,8 @@ pipeline {
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-                sh 'docker push your-docker-hub-username/php:8.2-rc-apache'
-                sh 'docker push your-docker-hub-username/mysql:8.0'
+                sh 'docker push devsegafl@gmail.com/php:8.2-rc-apache'
+                sh 'docker push devsegafl@gmail.com/mysql:8.0'
             }
         }
     }
