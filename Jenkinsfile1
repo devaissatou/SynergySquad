@@ -47,8 +47,7 @@ pipeline {
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-	dir("app")
-                {
+
                 sh 'docker build -t app_synergietransport:1.0.0 -f Dockerfile .'
 		sh 'docker build -t db_synergietransport:1.0.0 -f Dockerfile1 .'
     withDockerRegistry([credentialsId: '32e93134-4755-41f7-b5b2-c7a7864885d1', url: 'https://index.docker.io/v1/']) {
