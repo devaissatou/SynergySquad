@@ -48,8 +48,8 @@ pipeline {
         stage('Push des images Docker sur Docker Hub') {
             steps {
 		sh 'docker login -u devsega -p dckr_pat_2OVP8jmV2An7hm8LJvotXMFob1A'
-                sh 'docker push devsega/synergysquad/app_synergietransport:1.0.1'
-                sh 'docker push devsega/synergysquad/db_synergietransport:1.0.1'
+                sh 'docker push devsega/synergysquad/app_synergietransport:1.0.0'
+                sh 'docker push devsega/synergysquad/db_synergietransport:1.0.0'
             }
         }
     }
