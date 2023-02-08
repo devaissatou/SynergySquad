@@ -1,11 +1,12 @@
 pipeline {
     agent any
+
     }
     stages {
         stage('Récupération du code') {
             steps {
                 git branch: 'dev-insa',
-          credentialsId: '279ce16a-9cd4-4402-a8d2-87253dc39d96',
+         credentialsId: '279ce16a-9cd4-4402-a8d2-87253dc39d96',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
