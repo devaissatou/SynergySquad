@@ -32,8 +32,11 @@ pipeline {
         }
         stage('Test de l’application') {
             steps {
-                sh 'curl http://localhost:8000'
-                sh 'firefox http://localhost:8000'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
+                sh 'sleep 10'
+                sh 'curl http://localhost:8000 
+                sh 'docker-compose down'
             }
         }
         stage('Tag des images Docker') {
