@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Déploiement des services') {
             steps {
-                sh '/usr/local/bin/docker-compose -f docker-compose.yml up -d'
+                sh 'docker-compose -f docker-compose.yml up -d'
             }
         }
         stage('Test de l’application') {
@@ -39,8 +39,8 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app-image your-docker-hub-username/app-image:version'
-                sh 'docker tag db-image your-docker-hub-username/db-image:version'
+                sh 'docker tag app-image devinsa777/app-image:version'
+                sh 'docker tag db-image devinsa777/db-image:version'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
