@@ -35,7 +35,7 @@ pipeline {
                 sh 'docker-compose build'
                 sh 'docker-compose up -d'
                 sh 'sleep 10'
-                sh 'curl http://localhost:8000 
+                sh 'curl http://localhost:8000' 
                 sh 'docker-compose down'
             }
         }
