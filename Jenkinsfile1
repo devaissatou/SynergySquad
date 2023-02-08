@@ -41,23 +41,21 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app_synergietransport:1.0.0 devsega/app_synergietransport:1.0.1'
-                sh 'docker tag db_synergietransport:1.0.0 devsega/db_synergietransport:1.0.1'
+                sh 'docker tag app_synergietransport:1.0.0 devsega/app_synergietransport:latest'
+                sh 'docker tag db_synergietransport:1.0.0 devsega/db_synergietransport:latest'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {
-		script {
+		
  
     withDockerRegistry([credentialsId: '32e93134-4755-41f7-b5b2-c7a7864885d1', url: 'https://index.docker.io/v1/']) {
-                docker.image('app_synergietransport:1.0.1').push('devsega/synergysquad')
-                docker.image('app_synergietransport:1.0.1').push('devsega/synergysquad:latest')
-		docker.image('db_synergietransport:1.0.1').push('devsega/synergysquad')
-                docker.image('db_synergietransport:1.0.1').push('devsega/synergysquad:latest') 
+                sh 'docker push devsega/app_synergietransport:latest'
+		sh 'docker push devsega/db_synergietransport:latest' 
             }
         }
     }
 }
 	}	
 
-}
+
