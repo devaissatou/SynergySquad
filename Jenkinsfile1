@@ -5,7 +5,7 @@ pipeline {
         stage('Récupération du code') {
             steps {
                 git branch: 'dev-insa',
-         credentialsId: '279ce16a-9cd4-4402-a8d2-87253dc39d96',
+         credentialsId: '04c19f4d-d821-41f6-a943-e34f15367406',
           url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
@@ -30,8 +30,11 @@ pipeline {
         }
         stage('Test de l’application') {
             steps {
-                sh 'curl http://localhost:8000'
-                sh 'firefox http://localhost:8000'
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
+                sh 'sleep 10'
+                sh 'curl http://localhost:8000' 
+                sh 'docker-compose down'
             }
         }
         stage('Tag des images Docker') {
