@@ -39,8 +39,8 @@ pipeline {
         }
         stage('Tag des images Docker') {
             steps {
-                sh 'docker tag app-image devinsa777/php:8.2-rc-apache'
-                sh 'docker tag db-image devinsa777/mysql:8.0'
+                sh 'docker tag synergiepipeline_php-apache-environment:latest  appsynergietransposrt'
+                sh 'docker tag synergiepipeline_database-environment:latest  dbsynergietransport'
             }
         }
         stage('Push des images Docker sur Docker Hub') {
