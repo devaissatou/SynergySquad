@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile1
 
     ports:
-        - "9906:3306"
+        - "9907:3306"
   phpmyadmin:
     image: phpmyadmin:5.2.0-apache
     ports:
