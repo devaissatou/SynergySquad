@@ -12,7 +12,7 @@ services:
     ports:
       - 8000:80
   database-environment:
-    container_name:synergiedatabase
+    container_name: synergiedatabase
     restart: always
     build:
       context: ./app
