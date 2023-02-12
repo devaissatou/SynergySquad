@@ -48,11 +48,13 @@ pipeline {
         }
 	stage('Push des images Docker sur Docker Hub') {
    	    steps {
+                script {
 		docker.withRegistry('https://index.docker.io/v1/', 'DockeerhubAuth') {
                 sh 'docker push appsynergietransport:1.0.${env.BUILD_NUMBER}'
                 sh 'docker push dbsynergietransport:1.0.${env.BUILD_NUMBER}'
-	        }
-              }
+	           }
+		}
+            }
 	}
     }
 }
