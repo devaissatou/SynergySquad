@@ -37,17 +37,5 @@ pipeline {
                 sh 'docker-compose down'
             }
         }
-        stage('Tag des images Docker') {
-            steps {
-                sh 'docker tag synergiepipeline_php-apache-environment:latest  appsynergietransposrt'
-                sh 'docker tag synergiepipeline_database-environment:latest  dbsynergietransport'
-            }
-        }
-        stage('Push des images Docker sur Docker Hub') {
-            steps {
-                sh 'docker push devinsa777/php:8.2-rc-apache'
-                sh 'docker push devinsa777/mysql:8.0'
-            }
-        }
     }
 }
