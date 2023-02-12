@@ -46,13 +46,14 @@ pipeline {
                }
            }
         }
-        stage('Push des images Docker sur Docker Hub') {
-            steps {		
-                withDockerRegistry([credentialsId: 'DockeerhubAuth', url: 'https://index.docker.io/v1/']) {
-                sh 'docker push appsynergietransport:1.0.${env.BUILD_NUMBER}'
-		sh 'docker push dbsynergietransport:1.0.${env.BUILD_NUMBER}' 
-                }
-            }
-        }
+	stage('Push des images Docker sur Docker Hub') {
+   	    steps {
+                withCredentials([string(credentialsId: 'DockeerhubAuth', variable: 'REGISTRY_PASSWORD')]) {
+                sh 'docker login -u "$REGISTRY_USR" --password-stdin docker.io'
+                sh 'docker push docker.io/appsynergietransport:1.0.${env.BUILD_NUMBER}'
+                sh 'docker push docker.io/dbsynergietransport:1.0.${env.BUILD_NUMBER}'
+       		 }
+    	    }
+	}
     }
 }
