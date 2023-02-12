@@ -48,18 +48,14 @@ pipeline {
         }
 	stage('Push des images Docker sur Docker Hub') {
             steps {
-                script {
-                     def buildNumber = env.BUILD_NUMBER
-		     withCredentials([string(credentialsId: 'dockerhub', variable: 'DOCKER_PASSWORD')]) {
-                     withDockerRegistry([credentialsId: 'dockerhub', registryUrl: 'https://index.docker.io/v1/']) {
-                     sh "docker push appsynergietransport:1.0.${buildNumber}"
-	             sh "docker push dbsynergietransport:1.0.${buildNumber}"
-   			}
-
+		script {
+	        def buildNumber = env.BUILD_NUMBER
+		withDockerRegistry([credentialsId: 'DockeerhubAuth', url: 'https://index.docker.io/v1/']) {
+                sh "docker push devinsa777/appsynergietransport:1.0.${buildNumber}"
+		sh "docker push devinsa777/dbsynergietransport:1.0.${buildNumber}" 
                     }
-                }
+		}
             }
-        }
-
+	}
     }
 }
