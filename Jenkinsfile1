@@ -48,9 +48,9 @@ pipeline {
         }
         stage('Push des images Docker sur Docker Hub') {
             steps {		
-                withDockerRegistry([credentialsId: '32e93134-4755-41f7-b5b2-c7a7864885d1', url: 'https://index.docker.io/v1/']) {
-                sh 'docker push appsynergietransport:1.0.${buildNumber}'
-		sh 'docker push dbsynergietransport:1.0.${buildNumber}' 
+                withDockerRegistry([credentialsId: 'DockeerhubAuth', url: 'https://index.docker.io/v1/']) {
+                sh 'docker push appsynergietransport:1.0.${env.BUILD_NUMBER}'
+		sh 'docker push dbsynergietransport:1.0.${env.BUILD_NUMBER}' 
                 }
             }
         }
