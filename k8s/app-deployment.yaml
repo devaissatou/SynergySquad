@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  namespace: app-synergietransport
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-synergietransport
+  template:
+    metadata:
+      labels:
+        app: app-synergietransport
+    spec:
+      containers:
+        - name: app-container
+          image: kane96/syn-apache2:1.0
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_ROOT_PASSWORD
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: MYSQL_PASSWORD
