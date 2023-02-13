@@ -41,8 +41,8 @@ pipeline {
            steps {
                script {
                    def buildNumber = env.BUILD_NUMBER
-                   sh "docker tag synergiepipeline_php-apache-environment:latest devinsa777/appsynergietransport:1.0.${buildNumber}"
-                   sh "docker tag synergiepipeline_database-environment:latest devinsa777/dbsynergietransport:1.0.${buildNumber}"
+                   sh "docker tag synergysquad_php-apache-environment:latest devinsa777/appsynergietransport:1.0.${buildNumber}"
+                   sh "docker tag synergysquad_database-environment:latest devinsa777/dbsynergietransport:1.0.${buildNumber}"
                }
            }
         }
