@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
     - name: phpmyadmin-container
-      image: phpmyadmin:5.2.0
+      image: phpmyadmin:5.2.0-apache
       env:
         - name: PMA_HOST
           value: mysql-service

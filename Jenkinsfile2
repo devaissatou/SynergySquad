@@ -3,24 +3,36 @@ pipeline {
     stages {
         stage('Récupération du code') {
             steps {
-                git branch: 'xxx', url: 'https://github.com/your-repo/your-app.git'
+                git branch: 'dev-insa',
+                credentialsId: '04c19f4d-d821-41f6-a943-e34f15367406',
+                url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
         stage('Build de l’image de l’application') {
             steps {
-                sh 'docker build -t app-image -f Dockerfile-app .'
+		dir("app") {
+                    sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+                }
             }
         }
         stage('Build de l’image de la base de données') {
             steps {
-                sh 'docker build -t db-image -f Dockerfile-db .'
+		dir("app") {
+                    sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+                }
             }
         }
         stage('Déploiement de l’application sur Kubernetes') {
             steps {
-                sh 'kubectl apply -f kubernetes/app-deployment.yml'
-                sh 'kubectl apply -f kubernetes/db-deployment.yml'
-                sh 'kubectl apply -f kubernetes/phpmyadmin-deployment.yml'
+                 sh 'eval $(ssh inse@192.168.1.16 "minikube docker-env")'
+                 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-deployment.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-namespace.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/mysql-pod.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/mysql-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/phpmyadmin-pod.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/phpmyadmin-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/secret.yaml"'
             }
         }
     }
