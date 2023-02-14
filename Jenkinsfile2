@@ -26,7 +26,7 @@ pipeline {
             steps {
                  sh("ssh-keyscan -H 192.168.1.16 >> ~/.ssh/known_hosts")
                  sh("ssh inse@192.168.1.16 'minikube docker-env' > minikube_env.txt")
-                 sh("eval $(<minikube_env.txt)")
+                 sh("eval ${'$'}(<minikube_env.txt)")
                  sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-deployment.yaml"'
 		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-namespace.yaml"'
 		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-service.yaml"'
