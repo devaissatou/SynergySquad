@@ -1,27 +1,52 @@
 pipeline {
-    agent any
+    agent any 
+
     stages {
         stage('Récupération du code') {
             steps {
-                git branch: 'xxx', url: 'https://github.com/your-repo/your-app.git'
+                git branch: 'dev_sega',
+          credentialsId: '050fd63a-9e70-4839-ab4d-ea1659d77f1f',
+          url: 'https://github.com/devaissatou/SynergySquad.git'
             }
         }
         stage('Build de l’image de l’application') {
             steps {
-                sh 'docker build -t app-image -f Dockerfile-app .'
+		dir("app") 
+		{
+                sh 'docker build -t app_synergietransport:1.0.0 -f Dockerfile .'
             }
         }
+		}
         stage('Build de l’image de la base de données') {
             steps {
-                sh 'docker build -t db-image -f Dockerfile-db .'
+		dir("app") 
+	{
+                sh 'docker build -t db_synergietransport:1.0.0 -f Dockerfile1 .'
             }
         }
+		}
+        
+        
+        
         stage('Déploiement de l’application sur Kubernetes') {
             steps {
-                sh 'kubectl apply -f kubernetes/app-deployment.yml'
-                sh 'kubectl apply -f kubernetes/db-deployment.yml'
-                sh 'kubectl apply -f kubernetes/phpmyadmin-deployment.yml'
+
+              dir("k8s")
+        {
+                sh 'kubectl apply -f app-namespace.yaml'
+                sh 'kubectl apply -f app-service.yaml'
+                sh 'kubectl apply -f mysql-service.yaml'
+                  sh 'kubectl apply -f phpmyadmin-service.yaml'
+                sh 'kubectl apply -f phpmyadmin-pod.yaml'
+                sh 'kubectl apply -f mysql-pod.yaml'
+               sh 'kubectl apply -f secret.yaml'
+              sh 'kubectl apply -f app-deployment.yaml'
+
+
+            }
+
+               
             }
         }
-    }
 }
+	}	

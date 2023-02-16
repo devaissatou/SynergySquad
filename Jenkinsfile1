@@ -56,4 +56,10 @@ pipeline {
         }
     }
 }
+
+post {
+        success {
+            slackSend message:"A new version of synergie transport is succesful build - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
 	}	
