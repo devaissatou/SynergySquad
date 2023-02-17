@@ -12,7 +12,11 @@ services:
     ports:
       - 8000:80
   database-environment:
+<<<<<<< HEAD
     container_name: database
+=======
+    container_name: synergiedatabase
+>>>>>>> dev-insa
     restart: always
     build:
       context: ./app

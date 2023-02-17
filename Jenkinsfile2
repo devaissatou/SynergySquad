@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    stages {
+        stage('Récupération du code') {
+            steps {
+                git branch: 'dev-insa',
+                credentialsId: '04c19f4d-d821-41f6-a943-e34f15367406',
+                url: 'https://github.com/devaissatou/SynergySquad.git'
+            }
+        }
+        stage('Build de l’image de l’application') {
+            steps {
+		dir("app") {
+                    sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+                }
+            }
+        }
+        stage('Build de l’image de la base de données') {
+            steps {
+		dir("app") {
+                    sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+                }
+            }
+        }
+        stage('Déploiement de l’application sur Kubernetes') {
+            steps {
+                 sh("ssh-keyscan -H 192.168.1.16 >> ~/.ssh/known_hosts")
+                 sh("ssh inse@192.168.1.16 'minikube docker-env' > minikube_env.txt")
+                 sh("eval ${'$'}(<minikube_env.txt)")
+                 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-deployment.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-namespace.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/app-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/mysql-pod.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/mysql-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/phpmyadmin-pod.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/phpmyadmin-service.yaml"'
+		 sh 'ssh inse@192.168.1.16 "kubectl apply -f /home/inse/SynergySquad/k8/secret.yaml"'
+            }
+        }
+    }
+}

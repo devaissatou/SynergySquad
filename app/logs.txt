@@ -1,0 +1,58 @@
+* 
+* ==> Audit <==
+* |---------|-----------------|----------|------|---------|---------------------|----------|
+| Command |      Args       | Profile  | User | Version |     Start Time      | End Time |
+|---------|-----------------|----------|------|---------|---------------------|----------|
+| start   | --driver=docker | minikube | root | v1.29.0 | 03 Feb 23 16:33 GMT |          |
+| start   |                 | minikube | root | v1.29.0 | 11 Feb 23 22:52 GMT |          |
+|---------|-----------------|----------|------|---------|---------------------|----------|
+
+* 
+* ==> Last Start <==
+* Log file created at: 2023/02/11 22:52:28
+Running on machine: crkd
+Binary: Built with gc go1.19.5 for linux/amd64
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+I0211 22:52:28.509808   10192 out.go:296] Setting OutFile to fd 1 ...
+I0211 22:52:28.510236   10192 out.go:348] isatty.IsTerminal(1) = true
+I0211 22:52:28.510242   10192 out.go:309] Setting ErrFile to fd 2...
+I0211 22:52:28.510251   10192 out.go:348] isatty.IsTerminal(2) = true
+I0211 22:52:28.510449   10192 root.go:334] Updating PATH: /root/.minikube/bin
+W0211 22:52:28.511515   10192 root.go:311] Error reading config file at /root/.minikube/config/config.json: open /root/.minikube/config/config.json: no such file or directory
+I0211 22:52:28.916263   10192 out.go:303] Setting JSON to false
+I0211 22:52:28.918207   10192 start.go:125] hostinfo: {"hostname":"crkd","uptime":5344,"bootTime":1676150604,"procs":316,"os":"linux","platform":"ubuntu","platformFamily":"debian","platformVersion":"22.04","kernelVersion":"5.15.0-58-generic","kernelArch":"x86_64","virtualizationSystem":"","virtualizationRole":"","hostId":"c0f54d56-d9fa-88d6-309c-406e5e2821e7"}
+I0211 22:52:28.918308   10192 start.go:135] virtualization:  
+I0211 22:52:28.921879   10192 out.go:177] 😄  minikube v1.29.0 on Ubuntu 22.04
+I0211 22:52:28.924454   10192 driver.go:365] Setting default libvirt URI to qemu:///system
+I0211 22:52:28.924480   10192 global.go:111] Querying for installed drivers using PATH=/root/.minikube/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
+I0211 22:52:28.924533   10192 notify.go:220] Checking for updates...
+I0211 22:52:29.706246   10192 global.go:122] podman default: true priority: 7, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "podman": executable file not found in $PATH Reason: Fix:Install Podman Doc:https://minikube.sigs.k8s.io/docs/drivers/podman/ Version:}
+W0211 22:52:29.720147   10192 preload.go:295] Failed to list preload files: open /root/.minikube/cache/preloaded-tarball: no such file or directory
+I0211 22:52:29.776737   10192 global.go:122] qemu2 default: true priority: 7, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "qemu-system-x86_64": executable file not found in $PATH Reason: Fix:Install qemu-system Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/qemu/ Version:}
+I0211 22:52:29.776780   10192 global.go:122] ssh default: false priority: 4, state: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
+I0211 22:52:29.776825   10192 global.go:122] virtualbox default: true priority: 6, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:unable to find VBoxManage in $PATH Reason: Fix:Install VirtualBox Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/virtualbox/ Version:}
+I0211 22:52:29.776860   10192 global.go:122] vmware default: true priority: 7, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "docker-machine-driver-vmware": executable file not found in $PATH Reason: Fix:Install docker-machine-driver-vmware Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/vmware/ Version:}
+I0211 22:52:31.021514   10192 docker.go:141] docker version: linux-23.0.0:Docker Engine - Community
+I0211 22:52:31.021588   10192 cli_runner.go:164] Run: docker system info --format "{{json .}}"
+I0211 22:52:31.621327   10192 info.go:266] docker info: {ID:YZNI:AXDJ:R4MC:XAVG:MSF4:E4IB:HJP5:PNOL:YRXN:4GB4:3VV7:HZPU Containers:9 ContainersRunning:1 ContainersPaused:0 ContainersStopped:8 Images:19 Driver:overlay2 DriverStatus:[[Backing Filesystem extfs] [Supports d_type true] [Using metacopy false] [Native Overlay Diff true] [userxattr false]] SystemStatus:<nil> Plugins:{Volume:[local] Network:[bridge host ipvlan macvlan null overlay] Authorization:<nil> Log:[awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog]} MemoryLimit:true SwapLimit:true KernelMemory:false KernelMemoryTCP:false CPUCfsPeriod:true CPUCfsQuota:true CPUShares:true CPUSet:true PidsLimit:true IPv4Forwarding:true BridgeNfIptables:true BridgeNfIP6Tables:true Debug:false NFd:30 OomKillDisable:false NGoroutines:37 SystemTime:2023-02-11 22:52:31.517690629 +0000 UTC LoggingDriver:json-file CgroupDriver:systemd NEventsListener:0 KernelVersion:5.15.0-58-generic OperatingSystem:Ubuntu 22.04.1 LTS OSType:linux Architecture:x86_64 IndexServerAddress:https://index.docker.io/v1/ RegistryConfig:{AllowNondistributableArtifactsCIDRs:[] AllowNondistributableArtifactsHostnames:[] InsecureRegistryCIDRs:[127.0.0.0/8] IndexConfigs:{DockerIo:{Name:docker.io Mirrors:[] Secure:true Official:true}} Mirrors:[]} NCPU:2 MemTotal:2035961856 GenericResources:<nil> DockerRootDir:/var/lib/docker HTTPProxy: HTTPSProxy: NoProxy: Name:crkd Labels:[] ExperimentalBuild:false ServerVersion:23.0.0 ClusterStore: ClusterAdvertise: Runtimes:{Runc:{Path:runc}} DefaultRuntime:runc Swarm:{NodeID: NodeAddr: LocalNodeState:inactive ControlAvailable:false Error: RemoteManagers:<nil>} LiveRestoreEnabled:false Isolation: InitBinary:docker-init ContainerdCommit:{ID:31aa4358a36870b21a992d3ad2bef29e1d693bec Expected:31aa4358a36870b21a992d3ad2bef29e1d693bec} RuncCommit:{ID:v1.1.4-0-g5fd4c4d Expected:v1.1.4-0-g5fd4c4d} InitCommit:{ID:de40ad0 Expected:de40ad0} SecurityOptions:[name=apparmor name=seccomp,profile=builtin name=cgroupns] ProductLicense: Warnings:<nil> ServerErrors:[] ClientInfo:{Debug:false Plugins:[map[Name:buildx Path:/usr/libexec/docker/cli-plugins/docker-buildx SchemaVersion:0.1.0 ShortDescription:Docker Buildx Vendor:Docker Inc. Version:v0.10.2] map[Name:compose Path:/usr/libexec/docker/cli-plugins/docker-compose SchemaVersion:0.1.0 ShortDescription:Docker Compose Vendor:Docker Inc. Version:v2.15.1] map[Name:scan Path:/usr/libexec/docker/cli-plugins/docker-scan SchemaVersion:0.1.0 ShortDescription:Docker Scan Vendor:Docker Inc. Version:v0.23.0]] Warnings:<nil>}}
+I0211 22:52:31.621418   10192 docker.go:282] overlay module found
+I0211 22:52:31.621426   10192 global.go:122] docker default: true priority: 9, state: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
+I0211 22:52:31.621493   10192 global.go:122] kvm2 default: true priority: 8, state: {Installed:false Healthy:false Running:false NeedsImprovement:false Error:exec: "virsh": executable file not found in $PATH Reason: Fix:Install libvirt Doc:https://minikube.sigs.k8s.io/docs/reference/drivers/kvm2/ Version:}
+I0211 22:52:31.621532   10192 global.go:122] none default: false priority: 4, state: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
+I0211 22:52:31.621546   10192 driver.go:300] not recommending "ssh" due to default: false
+I0211 22:52:31.621550   10192 driver.go:300] not recommending "none" due to default: false
+I0211 22:52:31.621566   10192 driver.go:335] Picked: docker
+I0211 22:52:31.621576   10192 driver.go:336] Alternatives: [ssh none]
+I0211 22:52:31.621580   10192 driver.go:337] Rejects: [podman qemu2 virtualbox vmware kvm2]
+I0211 22:52:31.623798   10192 out.go:177] ✨  Automatically selected the docker driver. Other choices: ssh, none
+I0211 22:52:31.625100   10192 start.go:296] selected driver: docker
+I0211 22:52:31.625114   10192 start.go:857] validating driver "docker" against <nil>
+I0211 22:52:31.625125   10192 start.go:868] status for docker: {Installed:true Healthy:true Running:false NeedsImprovement:false Error:<nil> Reason: Fix: Doc: Version:}
+W0211 22:52:31.625226   10192 out.go:239] 🛑  The "docker" driver should not be used with root privileges. If you wish to continue as root, use --force.
+W0211 22:52:31.625404   10192 out.go:239] 💡  If you are running minikube within a VM, consider using --driver=none:
+W0211 22:52:31.625848   10192 out.go:239] 📘    https://minikube.sigs.k8s.io/docs/reference/drivers/none/
+I0211 22:52:31.627472   10192 out.go:177] 
+W0211 22:52:31.630556   10192 out.go:239] ❌  Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
+I0211 22:52:31.631837   10192 out.go:177] 
+
+* 

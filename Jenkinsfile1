@@ -1,0 +1,61 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Récupération du code') {
+            steps {
+                git branch: 'dev-insa',
+         credentialsId: '04c19f4d-d821-41f6-a943-e34f15367406',
+          url: 'https://github.com/devaissatou/SynergySquad.git'
+            }
+        }
+        stage('Build de l’image de l’application') {
+            steps {
+		dir("app") {
+                    sh 'docker build -t synergysquad_php-apache-environment -f Dockerfile .'
+                }
+            }
+        }
+        stage('Build de l’image de la base de données') {
+            steps {
+		dir("app") {
+                    sh 'docker build -t synergysquad_database-environment -f Dockerfile1 .'
+                }
+            }
+        }
+        stage('Déploiement des services') {
+            steps {
+                   sh 'docker-compose -f docker-compose.yml up -d'
+            }
+        }
+        stage('Test de l’application') {
+            steps {
+                sh 'docker-compose build'
+                sh 'docker-compose up -d'
+                sh 'sleep 10'
+                sh 'curl http://localhost:8000' 
+                sh 'docker-compose down'
+            }
+        }
+	stage('Tag des images Docker') {
+           steps {
+               script {
+                   def buildNumber = env.BUILD_NUMBER
+                   sh "docker tag synergysquad_php-apache-environment:latest devinsa777/appsynergietransport:1.0.${buildNumber}"
+                   sh "docker tag synergysquad_database-environment:latest devinsa777/dbsynergietransport:1.0.${buildNumber}"
+               }
+           }
+        }
+	stage('Push des images Docker sur Docker Hub') {
+            steps {
+		script {
+	        def buildNumber = env.BUILD_NUMBER
+		withDockerRegistry([credentialsId: 'DockeerhubAuth', url: 'https://index.docker.io/v1/']) {
+                sh "docker push devinsa777/appsynergietransport:1.0.${buildNumber}"
+		sh "docker push devinsa777/dbsynergietransport:1.0.${buildNumber}" 
+                    }
+		}
+            }
+	}
+    }
+}
